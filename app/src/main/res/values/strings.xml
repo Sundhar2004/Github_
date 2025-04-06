@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Github</string>
+    <string name="welcome_to_github">Welcome to Github</string>
+    <string name="google_button">Sign in with google</string>
 </resources>
