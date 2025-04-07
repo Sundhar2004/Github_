@@ -31,9 +31,9 @@ class RepositoryListActivity : AppCompatActivity() {
 
         binding.repositoryListRv.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this)[GitHubViewModel::class.java]
+        val token = "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"
 
-
-         // viewModel.fetchGitHubData(token)
+         viewModel.fetchGitHubData(token)
         viewModel.userInfo.observe(this){ user ->
 
         }
