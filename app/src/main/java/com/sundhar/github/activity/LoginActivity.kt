@@ -1,5 +1,6 @@
 package com.sundhar.github.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.googleSignInBtn.setOnClickListener {
+            val mainIntent = Intent(this@LoginActivity, RepositoryListActivity::class.java)
+            this@LoginActivity.startActivity(mainIntent)
+            this@LoginActivity.finish()
             Toast.makeText(this,"Working in progress", Toast.LENGTH_SHORT).show()
         }
 

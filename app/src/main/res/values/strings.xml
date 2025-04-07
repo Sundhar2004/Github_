@@ -2,4 +2,5 @@
     <string name="app_name">Github</string>
     <string name="welcome_to_github">Welcome to Github</string>
     <string name="google_button">Sign in with google</string>
+    <string name="github_repository">GitHub Repository</string>
 </resources>
