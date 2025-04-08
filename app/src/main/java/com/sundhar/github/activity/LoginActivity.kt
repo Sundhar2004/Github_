@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
             val mainIntent = Intent(this@LoginActivity, RepositoryListActivity::class.java)
             this@LoginActivity.startActivity(mainIntent)
             this@LoginActivity.finish()
-            Toast.makeText(this,"Working in progress", Toast.LENGTH_SHORT).show()
         }
 
     }
