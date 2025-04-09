@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Github"
         tools:targetApi="31">
         <activity
+            android:name=".activity.RepositoryViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SettingActivity"
             android:exported="false" />
         <activity

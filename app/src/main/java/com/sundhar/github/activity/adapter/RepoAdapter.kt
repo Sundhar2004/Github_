@@ -1,5 +1,7 @@
 package com.sundhar.github.activity.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.sundhar.github.R
+import com.sundhar.github.activity.RepositoryViewActivity
+import com.sundhar.github.activity.SettingActivity
 import com.sundhar.github.model.Repo
 
-class RepoAdapter(private val repoList: List<Repo>) :
+class RepoAdapter(private val context: Context,private val repoList: List<Repo>) :
     RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
@@ -24,6 +28,13 @@ class RepoAdapter(private val repoList: List<Repo>) :
         Log.e("repoList_adp", Gson().toJson(repo))
         holder.repoName.text = repo.name
         holder.repoDesc.text = repo.description ?: "Description Unavailable"
+
+        holder.itemView.setOnClickListener {
+            val mainIntent = Intent(context, RepositoryViewActivity::class.java)
+            mainIntent.putExtra("title", repo.name)
+            mainIntent.putExtra("description", repo.description)
+            context.startActivity(mainIntent)
+        }
     }
 
     override fun getItemCount() = repoList.size

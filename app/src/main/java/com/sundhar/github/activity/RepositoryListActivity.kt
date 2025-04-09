@@ -47,7 +47,7 @@ class RepositoryListActivity : AppCompatActivity() {
 
         binding.repositoryListRv.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this, GitHubViewModelFactory(repository,dbRepository))[GitHubViewModel::class.java]
-        val token = "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"
+        val token = "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"
 
 
         /** button for setting pag navigate*/
@@ -65,14 +65,14 @@ class RepositoryListActivity : AppCompatActivity() {
             /** Network Available -> API Call*/
             viewModel.fetchGitHubData(token)
             viewModel.repo.observe(this){ repoList ->
-                binding.repositoryListRv.adapter = RepoAdapter(repoList)
+                binding.repositoryListRv.adapter = RepoAdapter(this,repoList)
             }
             Log.d("network","online")
         } else {
             /** No Internet -> Get from Room DB */
             viewModel.offlineRepos.observe(this) { repoEntityList ->
                 val repoList = repoEntityList.map { it.toRepo() }
-                binding.repositoryListRv.adapter = RepoAdapter(repoList)
+                binding.repositoryListRv.adapter = RepoAdapter(this,repoList)
             }
             Log.d("network","offline")
         }
