@@ -32,7 +32,7 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/github"/>
+                    android:src="@drawable/github_list_icon"/>
 
                 <TextView
                     android:id="@+id/repoName"

@@ -1,5 +1,6 @@
 package com.sundhar.github.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -41,32 +42,39 @@ class RepositoryListActivity : AppCompatActivity() {
         val dbRepository = RepoRepository(applicationContext)
 
         FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
-
             Log.d("FCM-Token", token)
         }
 
         binding.repositoryListRv.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this, GitHubViewModelFactory(repository,dbRepository))[GitHubViewModel::class.java]
-        val token = "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"
+        val token = "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"
 
-         viewModel.fetchGitHubData(token)
+
+        /** button for setting pag navigate*/
+        binding.settingBtn.setOnClickListener {
+            val mainIntent = Intent(this@RepositoryListActivity, SettingActivity::class.java)
+            this@RepositoryListActivity.startActivity(mainIntent)
+        }
+
+        /** This for getting user info details */
         viewModel.userInfo.observe(this){ user ->
 
         }
 
         if (helper.isNetworkAvailable(this)) {
             /** Network Available -> API Call*/
+            viewModel.fetchGitHubData(token)
             viewModel.repo.observe(this){ repoList ->
                 binding.repositoryListRv.adapter = RepoAdapter(repoList)
             }
-            Toast.makeText(this,"You are in online!", Toast.LENGTH_SHORT).show()
+            Log.d("network","online")
         } else {
             /** No Internet -> Get from Room DB */
             viewModel.offlineRepos.observe(this) { repoEntityList ->
                 val repoList = repoEntityList.map { it.toRepo() }
                 binding.repositoryListRv.adapter = RepoAdapter(repoList)
             }
-            Toast.makeText(this,"You are in offline!", Toast.LENGTH_SHORT).show()
+            Log.d("network","offline")
         }
     }
 
