@@ -23,9 +23,11 @@ class RepositoryViewActivity : AppCompatActivity() {
         }
 
         val title = intent.getStringExtra("title")
+        val owner = intent.getStringExtra("owner")
         val description = intent.getStringExtra("description")
 
         binding.titleTv.text = title.toString()
+        binding.ownerNameTv.text = owner.toString()
         binding.descriptionTv.text = description.toString()
     }
 }

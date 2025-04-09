@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "248051217139",
+    "project_id": "github-8f485",
+    "storage_bucket": "github-8f485.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248051217139:android:9ce0b4276ef65d24543d86",
+        "android_client_info": {
+          "package_name": "com.sundhar.github"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248051217139-pg30dlp0dll9tpeth2tl7oegjcepl1lb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sundhar.github",
+            "certificate_hash": "f92250280af0f11e4eb2c97cb5edceeb7ce9a5af"
+          }
+        },
+        {
+          "client_id": "248051217139-fpbag9qs8infitr5jeegrmb92b1507pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_gIBl-GN91SnZZu3zQuI9p5JYjep5QHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248051217139-fpbag9qs8infitr5jeegrmb92b1507pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,4 +9,5 @@ data class RepoEntity(
     val id : Int =0,
     val name: String,
     val description: String?,
+    val ownerName: String
 )

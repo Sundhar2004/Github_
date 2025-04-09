@@ -33,6 +33,7 @@ class RepoAdapter(private val context: Context,private val repoList: List<Repo>)
             val mainIntent = Intent(context, RepositoryViewActivity::class.java)
             mainIntent.putExtra("title", repo.name)
             mainIntent.putExtra("description", repo.description)
+            mainIntent.putExtra("owner", repo.owner.login)
             context.startActivity(mainIntent)
         }
     }

@@ -2,6 +2,8 @@ package com.sundhar.github.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +17,7 @@ import com.sundhar.github.GitHubViewModelFactory
 import com.sundhar.github.R
 import com.sundhar.github.activity.adapter.RepoAdapter
 import com.sundhar.github.databinding.ActivityRepositoryListBinding
+import com.sundhar.github.model.Owner
 import com.sundhar.github.model.Repo
 import com.sundhar.github.offlineMode.RepoEntity
 import com.sundhar.github.offlineMode.RepoRepository
@@ -47,7 +50,7 @@ class RepositoryListActivity : AppCompatActivity() {
 
         binding.repositoryListRv.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this, GitHubViewModelFactory(repository,dbRepository))[GitHubViewModel::class.java]
-        val token = "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"
+        val token = "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"
 
 
         /** button for setting pag navigate*/
@@ -56,16 +59,15 @@ class RepositoryListActivity : AppCompatActivity() {
             this@RepositoryListActivity.startActivity(mainIntent)
         }
 
-        /** This for getting user info details */
-        viewModel.userInfo.observe(this){ user ->
-
-        }
 
         if (helper.isNetworkAvailable(this)) {
             /** Network Available -> API Call*/
             viewModel.fetchGitHubData(token)
             viewModel.repo.observe(this){ repoList ->
                 binding.repositoryListRv.adapter = RepoAdapter(this,repoList)
+            }
+            viewModel.repo.observe(this) { repoList ->
+                viewModel.searchRepo(binding.searchEt.text.toString()) // <-- Important
             }
             Log.d("network","online")
         } else {
@@ -76,6 +78,23 @@ class RepositoryListActivity : AppCompatActivity() {
             }
             Log.d("network","offline")
         }
+
+        binding.searchEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.searchRepo(s.toString())
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+
+        viewModel.filteredRepos.observe(this@RepositoryListActivity) { repoList ->
+            binding.repositoryListRv.adapter = RepoAdapter(this@RepositoryListActivity, repoList)
+        }
+
     }
 
     /** Conversion : Repo(API model) to RepoEntity(DB) */
@@ -83,7 +102,8 @@ class RepositoryListActivity : AppCompatActivity() {
         return Repo(
             name = this.name,
             description = this.description,
-            html_url = this.name
+            html_url = this.name,
+            owner = Owner(this.ownerName)
         )
     }
 
